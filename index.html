@@ -35,7 +35,7 @@
         }
 
         .hero-overlay {
-            background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.7));
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.7));
         }
 
         .card-hover:hover {
@@ -76,22 +76,28 @@
                 width: 100%;
             }
 
-            .nav-link:hover {
-                transform: translateY(-1px);
-            }
+        /* Mobile Menu Animation */
+        #mobile-menu {
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .menu-open {
+            transform: translateX(0) !important;
+        }
     </style>
 </head>
-<body class="bg-stone-50 text-stone-800">
+<body class="bg-stone-50 text-stone-800 overflow-x-hidden">
 
     <!-- Navbar Sofisticada -->
     <nav class="fixed w-full z-50 bg-white/80 backdrop-blur-xl border-b border-stone-200/40 shadow-sm">
-        <div class="max-w-7xl mx-auto px-6 py-3 flex justify-between items-center">
-            <div class="flex items-center space-x-3 group cursor-pointer">
-                <img src="Images/Logo.png" alt="Bella Veneto Logo" class="w-12 h-12 rounded-full logo-circle object-cover transition-transform group-hover:rotate-12">
-                <div class="text-xl font-bold text-stone-900 tracking-tighter">BELLA <span class="gold-accent">VENETO</span></div>
+        <div class="max-w-7xl mx-auto px-4 md:px-6 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2 md:space-x-3 group cursor-pointer">
+                <img src="Images/Logo.png" alt="Bella Veneto Logo" class="w-10 h-10 md:w-12 md:h-12 rounded-full logo-circle object-cover transition-transform group-hover:rotate-12">
+                <div class="text-lg md:text-xl font-bold text-stone-900 tracking-tighter">BELLA <span class="gold-accent">VENETO</span></div>
             </div>
 
-            <div class="hidden md:flex space-x-10 font-medium uppercase text-[10px] tracking-[0.2em]">
+            <!-- Desktop Menu -->
+            <div class="hidden lg:flex space-x-8 font-medium uppercase text-[10px] tracking-[0.2em]">
                 <a href="#inicio" class="nav-link hover:text-gold-accent">Início</a>
                 <a href="#valores" class="nav-link hover:text-gold-accent">Valores</a>
                 <a href="#cardapio" class="nav-link hover:text-gold-accent">Cardápio</a>
@@ -100,11 +106,35 @@
                 <a href="#contato" class="nav-link hover:text-gold-accent">Localização</a>
             </div>
 
-            <button onclick="document.getElementById('reserva').scrollIntoView({behavior:'smooth'})" class="bg-[#4a0404] text-white px-8 py-2.5 rounded-full text-[11px] font-bold uppercase hover:bg-black hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
-                Reservar Mesa
-            </button>
+            <div class="flex items-center space-x-4">
+                <button onclick="document.getElementById('reserva').scrollIntoView({behavior:'smooth'})" class="hidden sm:block bg-[#4a0404] text-white px-6 py-2 rounded-full text-[10px] md:text-[11px] font-bold uppercase hover:bg-black hover:shadow-lg hover:-translate-y-0.5 transition-all duration-300">
+                    Reservar Mesa
+                </button>
+
+                <!-- Hamburger Button -->
+                <button onclick="toggleMenu()" class="lg:hidden text-[#1a2421] p-2 focus:outline-none">
+                    <i id="menu-icon" class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
         </div>
     </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="fixed inset-0 z-[60] bg-[#1a2421] translate-x-full lg:hidden flex flex-col items-center justify-center space-y-8">
+        <button onclick="toggleMenu()" class="absolute top-6 right-6 text-white/50 hover:text-white transition">
+            <i class="fas fa-times text-3xl"></i>
+        </button>
+        <img src="Images/Logo.png" class="w-24 h-24 rounded-full logo-circle mb-4" alt="Logo">
+        <a href="#inicio" onclick="toggleMenu()" class="text-white text-2xl font-light tracking-widest uppercase hover:text-gold-accent transition">Início</a>
+        <a href="#valores" onclick="toggleMenu()" class="text-white text-2xl font-light tracking-widest uppercase hover:text-gold-accent transition">Valores</a>
+        <a href="#cardapio" onclick="toggleMenu()" class="text-white text-2xl font-light tracking-widest uppercase hover:text-gold-accent transition">Cardápio</a>
+        <a href="#delivery" onclick="toggleMenu()" class="text-gold-accent text-2xl font-bold tracking-widest uppercase hover:text-white transition">Delivery</a>
+        <a href="#reserva" onclick="toggleMenu()" class="text-white text-2xl font-light tracking-widest uppercase hover:text-gold-accent transition">Reservas</a>
+        <a href="#contato" onclick="toggleMenu()" class="text-white text-2xl font-light tracking-widest uppercase hover:text-gold-accent transition">Localização</a>
+        <button onclick="toggleMenu(); document.getElementById('reserva').scrollIntoView({behavior:'smooth'})" class="mt-8 bg-gold-accent text-[#1a2421] px-10 py-4 rounded-full font-bold uppercase tracking-widest text-sm shadow-xl">
+            Reservar Agora
+        </button>
+    </div>
 
     <!-- Hero Section -->
     <section id="inicio" class="relative h-screen flex items-center justify-center text-center text-white overflow-hidden">
@@ -112,70 +142,67 @@
             <img src="Images/Fundo 2.png" alt="Ambiente Bella Veneto" class="hero-image">
             <div class="absolute inset-0 hero-overlay"></div>
         </div>
-        <div class="relative z-10 px-4 max-w-4xl">
-            <span class="gold-accent uppercase tracking-[0.4em] text-xs mb-4 block font-bold">Autêntica Culinária Italiana</span>
-            <h1 class="text-6xl md:text-8xl mb-6 leading-tight">Com um toque especial</h1>
-            <p class="text-lg md:text-2xl mb-10 font-light italic text-stone-200">O sabor original do galeto desossado, servido em um ambiente inesquecível.</p>
-            <div class="flex flex-col sm:flex-row justify-center gap-4">
-                <a href="#valores" class="bg-white text-stone-900 px-10 py-4 rounded-full font-bold hover:bg-stone-200 transition shadow-xl uppercase text-sm">Ver Valores</a>
-                <a href="https://delivery.yooga.app/bella-veneto/tabs/home" target="_blank" class="bg-gold-accent text-white px-10 py-4 rounded-full font-bold hover:bg-yellow-600 transition shadow-xl uppercase text-sm flex items-center justify-center gap-2">
+        <div class="relative z-10 px-6 max-w-4xl">
+            <span class="gold-accent uppercase tracking-[0.3em] md:tracking-[0.4em] text-[10px] md:text-xs mb-4 block font-bold">Autêntica Culinária Italiana</span>
+            <h1 class="text-4xl sm:text-5xl md:text-8xl mb-6 leading-tight font-bold">Com um toque especial</h1>
+            <p class="text-sm md:text-2xl mb-10 font-light italic text-stone-200">O sabor original do galeto desossado, servido em um ambiente inesquecível.</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4 px-4 sm:px-0">
+                <a href="#valores" class="bg-white text-stone-900 px-8 py-3.5 md:px-10 md:py-4 rounded-full font-bold hover:bg-stone-200 transition shadow-xl uppercase text-xs md:text-sm">Ver Valores</a>
+                <a href="https://delivery.yooga.app/bella-veneto/tabs/home" target="_blank" class="bg-gold-accent text-white px-8 py-3.5 md:px-10 md:py-4 rounded-full font-bold hover:bg-yellow-600 transition shadow-xl uppercase text-xs md:text-sm flex items-center justify-center gap-2">
                     <i class="fas fa-motorcycle"></i> Pedir Online
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- Seção Nossos Valores (Preços e Refeições) -->
-    <section id="valores" class="py-24 bg-white">
+    <!-- Seção Nossos Valores -->
+    <section id="valores" class="py-16 md:py-24 bg-white">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl text-stone-900 mb-4 tracking-tight">Nossos <span class="gold-accent">Valores</span></h2>
-                <p class="text-stone-400 uppercase tracking-widest text-xs font-bold">Experiência Gastronômica Completa</p>
-                <div class="w-20 h-1 bg-gold-accent mx-auto mt-6"></div>
+            <div class="text-center mb-12 md:mb-16">
+                <h2 class="text-3xl md:text-5xl text-stone-900 mb-4 tracking-tight">Nossos <span class="gold-accent">Valores</span></h2>
+                <p class="text-stone-400 uppercase tracking-widest text-[10px] md:text-xs font-bold">Experiência Gastronômica Completa</p>
+                <div class="w-16 md:w-20 h-1 bg-gold-accent mx-auto mt-6"></div>
             </div>
 
-            <div class="grid lg:grid-cols-2 gap-12 mb-16">
-                <!-- Card Almoço Executivo -->
-                <div class="card-hover bg-stone-50 rounded-[2.5rem] overflow-hidden border border-stone-100 flex flex-col md:flex-row shadow-sm">
-                    <div class="md:w-1/3 h-48 md:h-auto">
+            <div class="grid lg:grid-cols-2 gap-8 md:gap-12 mb-12 md:mb-16">
+                <!-- Almoço Executivo -->
+                <div class="card-hover bg-stone-50 rounded-[2rem] md:rounded-[2.5rem] overflow-hidden border border-stone-100 flex flex-col shadow-sm">
+                    <div class="h-48 md:h-64 overflow-hidden">
                         <img src="Images/galeto.png" class="w-full h-full object-cover" alt="Buffet Executivo">
                     </div>
-                    <div class="p-8 flex-1">
+                    <div class="p-6 md:p-8 flex-1">
                         <div class="flex justify-between items-start mb-4">
                             <div>
-                                <span class="text-[10px] font-bold uppercase tracking-widest text-gold-accent">Terça a Sexta</span>
-                                <h3 class="text-2xl font-bold text-stone-900">Almoço Executivo</h3>
+                                <span class="text-[9px] md:text-[10px] font-bold uppercase tracking-widest text-gold-accent">Terça a Sexta</span>
+                                <h3 class="text-xl md:text-2xl font-bold text-stone-900">Almoço Executivo</h3>
                             </div>
-                            <span class="bg-stone-200 text-stone-600 text-[10px] px-3 py-1 rounded-full font-bold uppercase tracking-tighter">Somente Buffet</span>
+                            <span class="bg-stone-200 text-stone-600 text-[9px] px-3 py-1 rounded-full font-bold uppercase tracking-tighter">Somente Buffet</span>
                         </div>
-                        <p class="text-stone-500 text-sm mb-6 leading-relaxed">
+                        <p class="text-stone-500 text-xs md:text-sm mb-6 leading-relaxed">
                             A opção perfeita para sua rotina. Buffet completo com direito a galeto de todos os sabores direto na mesa.<br />
-                            <span class="text-stone-400 text-xs mb-1">Misto (com os 3 sabores) <br /></span>
-                            <span class="text-stone-400 text-xs mb-1">Parmesão<br /></span>
-                            <span class="text-stone-400 text-xs mb-1">Gorgonzola<br /></span>
-                            <span class="text-stone-400 text-xs mb-1">Tradicional (sem tempero).</span>
+                            <span class="text-stone-400 block mt-2">• Misto, Parmesão, Gorgonzola e Tradicional.</span>
                         </p>
                         <div class="flex items-end space-x-2">
-                            <span class="text-3xl font-bold text-[#4a0404]">R$ 59,00</span>
-                            <span class="text-stone-400 text-xs mb-1">/ por pessoa</span>
+                            <span class="text-2xl md:text-3xl font-bold text-[#4a0404]">R$ 59,00</span>
+                            <span class="text-stone-400 text-[10px] md:text-xs mb-1">/ por pessoa</span>
                         </div>
                     </div>
                 </div>
 
-                <!-- Card Rodízio Tradicional -->
-                <div class="card-hover bg-[#1a2421] text-white rounded-[2.5rem] overflow-hidden border border-stone-800 flex flex-col md:flex-row shadow-xl">
-                    <div class="md:w-1/3 h-48 md:h-auto">
+                <!-- Rodízio Tradicional -->
+                <div class="card-hover bg-[#1a2421] text-white rounded-[2rem] md:rounded-[2.5rem] overflow-hidden border border-stone-800 flex flex-col shadow-xl">
+                    <div class="h-48 md:h-64 overflow-hidden">
                         <img src="Images/Sopa.png" class="w-full h-full object-cover" alt="Rodízio Tradicional">
                     </div>
-                    <div class="p-8 flex-1">
+                    <div class="p-6 md:p-8 flex-1">
                         <div class="flex justify-between items-start mb-4">
                             <div>
-                                <span class="text-[10px] font-bold uppercase tracking-widest text-gold-accent">Experiência Completa</span>
-                                <h3 class="text-2xl font-bold">Rodízio Bella Veneto</h3>
+                                <span class="text-[9px] md:text-[10px] font-bold uppercase tracking-widest text-gold-accent">Experiência Completa</span>
+                                <h3 class="text-xl md:text-2xl font-bold">Rodízio Bella Veneto</h3>
                             </div>
-                            <span class="bg-gold-accent text-[#1a2421] text-[10px] px-3 py-1 rounded-full font-bold uppercase tracking-tighter shadow-sm">Rodízio</span>
+                            <span class="bg-gold-accent text-[#1a2421] text-[9px] px-3 py-1 rounded-full font-bold uppercase tracking-tighter shadow-sm">Rodízio</span>
                         </div>
-                        <ul class="text-stone-300 text-[13px] space-y-2 mb-6">
+                        <ul class="text-stone-300 text-xs md:text-[13px] space-y-2 mb-6">
                             <li class="flex items-center gap-2"><i class="fas fa-check text-gold-accent text-[10px]"></i> Sopa de Capeletti Tradicional</li>
                             <li class="flex items-center gap-2"><i class="fas fa-check text-gold-accent text-[10px]"></i> Porções de Polenta e Queijo Fritos</li>
                             <li class="flex items-center gap-2"><i class="fas fa-check text-gold-accent text-[10px]"></i> Pães com Queijo Ralado </li>
@@ -183,187 +210,171 @@
                         </ul>
                         <div class="flex flex-wrap gap-4 pt-4 border-t border-white/10">
                             <div>
-                                <span class="block text-[10px] text-stone-400 uppercase font-bold">Ter a Sex (Janta)</span>
-                                <span class="text-xl font-bold text-gold-accent">R$ 85,00</span>
+                                <span class="block text-[9px] text-stone-400 uppercase font-bold">Ter a Sex (Janta)</span>
+                                <span class="text-lg md:text-xl font-bold text-gold-accent">R$ 85,00</span>
                             </div>
                             <div>
-                                <span class="block text-[10px] text-stone-400 uppercase font-bold">Sáb (Almoço)</span>
-                                <span class="text-xl font-bold text-gold-accent">R$ 85,00</span>
+                                <span class="block text-[9px] text-stone-400 uppercase font-bold">Sáb (Almoço)</span>
+                                <span class="text-lg md:text-xl font-bold text-gold-accent">R$ 85,00</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Tabela Adicional de Valores Final de Semana -->
-            <div class="max-w-3xl mx-auto bg-stone-50 p-8 rounded-3xl border border-stone-100 shadow-sm text-center">
-                <h4 class="text-stone-900 font-bold mb-4 uppercase text-xs tracking-widest">Valores de Final de Semana & Feriados</h4>
-                <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
+            <!-- Valores FDS -->
+            <div class="max-w-3xl mx-auto bg-stone-50 p-6 md:p-8 rounded-[2rem] border border-stone-100 shadow-sm text-center">
+                <h4 class="text-stone-900 font-bold mb-6 uppercase text-[10px] md:text-xs tracking-widest">Finais de Semana & Feriados</h4>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
                     <div class="p-4 bg-white rounded-2xl shadow-sm border border-stone-100">
-                        <span class="block text-[10px] text-stone-400 uppercase font-bold mb-1">Sábado (Janta)</span>
-                        <span class="text-2xl font-bold text-[#4a0404]">R$ 95,00</span>
+                        <span class="block text-[9px] text-stone-400 uppercase font-bold mb-1">Sábado (Janta)</span>
+                        <span class="text-xl md:text-2xl font-bold text-[#4a0404]">R$ 95,00</span>
                     </div>
                     <div class="p-4 bg-white rounded-2xl shadow-sm border border-stone-100">
-                        <span class="block text-[10px] text-stone-400 uppercase font-bold mb-1">Domingo (Almoço)</span>
-                        <span class="text-2xl font-bold text-[#4a0404]">R$ 95,00</span>
+                        <span class="block text-[9px] text-stone-400 uppercase font-bold mb-1">Domingo (Almoço)</span>
+                        <span class="text-xl md:text-2xl font-bold text-[#4a0404]">R$ 95,00</span>
                     </div>
                     <div class="hidden md:flex p-4 bg-gold-accent rounded-2xl shadow-sm border border-gold-accent items-center justify-center">
-                        <span class="text-[10px] text-[#1a2421] uppercase font-black leading-tight">Rodízio<br />Completo</span>
+                        <span class="text-[9px] text-[#1a2421] uppercase font-black leading-tight">Rodízio<br />Completo</span>
                     </div>
                 </div>
-                <p class="mt-6 text-[11px] text-stone-400 italic">Preços válidos por pessoa. Bebidas não inclusas.</p>
+                <p class="mt-6 text-[10px] md:text-[11px] text-stone-400 italic">Preços válidos por pessoa. Bebidas não inclusas.</p>
             </div>
         </div>
     </section>
 
     <!-- Seção Cardápio (Em Breve) -->
-    <section id="cardapio" class="py-24 bg-stone-50 border-y border-stone-200">
+    <section id="cardapio" class="py-16 md:py-24 bg-stone-50 border-y border-stone-200">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl md:text-5xl text-stone-900 mb-4 tracking-tight">Nosso <span class="gold-accent">Cardápio</span></h2>
-                <p class="text-stone-400 uppercase tracking-widest text-xs font-bold">Frescor e Tradição Diária</p>
-                <div class="w-20 h-1 bg-gold-accent mx-auto mt-6"></div>
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-5xl text-stone-900 mb-4 tracking-tight">Nosso <span class="gold-accent">Cardápio</span></h2>
+                <div class="w-16 md:w-20 h-1 bg-gold-accent mx-auto"></div>
             </div>
 
-            <div class="max-w-4xl mx-auto bg-white p-12 md:p-20 rounded-[3rem] shadow-sm border border-stone-100 text-center relative overflow-hidden">
-                <!-- Detalhe decorativo de fundo -->
-                <div class="absolute top-0 right-0 p-10 opacity-5 pointer-events-none">
-                    <i class="fas fa-utensils text-9xl"></i>
+            <div class="max-w-4xl mx-auto bg-white p-8 md:p-20 rounded-[2rem] md:rounded-[3rem] shadow-sm border border-stone-100 text-center relative overflow-hidden">
+                <div class="absolute top-0 right-0 p-10 opacity-5 pointer-events-none hidden sm:block">
+                    <i class="fas fa-utensils text-9xl text-[#1a2421]"></i>
                 </div>
 
                 <div class="relative z-10">
-                    <div class="w-16 h-16 bg-stone-50 rounded-full flex items-center justify-center mx-auto mb-8">
-                        <i class="fas fa-hourglass-half text-gold-accent text-3xl"></i>
+                    <div class="w-12 h-12 md:w-16 md:h-16 bg-stone-50 rounded-full flex items-center justify-center mx-auto mb-6 md:mb-8">
+                        <i class="fas fa-hourglass-half text-gold-accent text-2xl md:text-3xl"></i>
                     </div>
-                    <h3 class="text-3xl font-bold text-stone-900 mb-6">Menu em Preparação</h3>
-                    <p class="text-stone-500 text-lg leading-relaxed max-w-2xl mx-auto italic">
-                        "Na Bella Veneto, o sabor é um ritual diário. Nosso cardápio é atualizado artesanalmente momentos antes da abertura, garantindo o frescor máximo de cada ingrediente."
+                    <h3 class="text-2xl md:text-3xl font-bold text-stone-900 mb-4 md:mb-6">Menu em Preparação</h3>
+                    <p class="text-stone-500 text-sm md:text-lg leading-relaxed max-w-2xl mx-auto italic">
+                        "Na Bella Veneto, o sabor é um ritual diário. Nosso cardápio é atualizado artesanalmente momentos antes da abertura."
                     </p>
-                    <div class="mt-12 flex flex-col items-center gap-4">
-                        <div class="inline-flex items-center gap-2 text-stone-400 font-bold uppercase text-[10px] tracking-widest">
+                    <div class="mt-8 md:mt-12 flex flex-col items-center gap-4">
+                        <div class="inline-flex items-center gap-2 text-stone-400 font-bold uppercase text-[9px] md:text-[10px] tracking-widest text-center">
                             <span class="w-2 h-2 rounded-full bg-gold-accent animate-pulse"></span>
                             Atualização diária automática em breve
                         </div>
-                        <p class="text-stone-300 text-[10px] uppercase font-bold tracking-tighter">Fique atento às nossas redes sociais</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Seção Delivery (Chamada rápida) -->
-    <section id="delivery" class="py-16 bg-stone-100 border-b border-stone-200">
+    <!-- Delivery -->
+    <section id="delivery" class="py-12 md:py-16 bg-stone-100 border-b border-stone-200">
         <div class="max-w-4xl mx-auto px-6 text-center">
-            <h2 class="text-3xl font-bold text-stone-900 mb-4 tracking-tighter italic">Prefere saborear em casa?</h2>
-            <p class="text-stone-600 mb-8 leading-relaxed">Leve a tradição da Bella Veneto para a sua mesa. Peça agora pelo nosso delivery oficial e receba com toda a comodidade.</p>
-            <a href="https://delivery.yooga.app/bella-veneto/tabs/home" target="_blank" class="inline-block bg-[#4a0404] text-white px-10 py-4 rounded-full font-bold shadow-lg hover:bg-black transition-all transform hover:-translate-y-1 uppercase text-xs tracking-widest">
+            <h2 class="text-2xl md:text-3xl font-bold text-stone-900 mb-4 tracking-tighter">Prefere saborear em casa?</h2>
+            <p class="text-sm md:text-lg text-stone-600 mb-8 leading-relaxed">Peça agora pelo nosso delivery oficial e receba a tradição em casa.</p>
+            <a href="https://delivery.yooga.app/bella-veneto/tabs/home" target="_blank" class="w-full sm:w-auto inline-block bg-[#4a0404] text-white px-8 md:px-10 py-4 rounded-full font-bold shadow-lg hover:bg-black transition-all transform hover:-translate-y-1 uppercase text-[10px] md:text-xs tracking-widest">
                 ACESSAR CARDÁPIO DELIVERY
             </a>
         </div>
     </section>
 
     <!-- Reservas -->
-    <section id="reserva" class="py-24 bg-[#1a2421] text-white relative overflow-hidden">
-        <div class="absolute top-0 right-0 opacity-5 pointer-events-none">
+    <section id="reserva" class="py-16 md:py-24 bg-[#1a2421] text-white relative overflow-hidden">
+        <div class="absolute top-0 right-0 opacity-5 pointer-events-none hidden lg:block">
             <i class="fas fa-utensils text-[40rem]"></i>
         </div>
-        <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-20 items-center">
-            <div class="relative z-10">
-                <h2 class="text-5xl font-bold mb-8 leading-tight">Experiência Digital, <br><span class="gold-accent">Sabor Real.</span></h2>
-                <p class="text-stone-400 text-lg mb-8 leading-relaxed">Garanta seu momento conosco. Reserve sua mesa em poucos segundos e receba a confirmação direto no seu dispositivo.</p>
-                <div class="space-y-6">
+        <div class="max-w-6xl mx-auto px-6 grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+            <div class="relative z-10 text-center lg:text-left">
+                <h2 class="text-3xl md:text-5xl font-bold mb-6 md:mb-8 leading-tight">Experiência Digital, <br><span class="gold-accent">Sabor Real.</span></h2>
+                <p class="text-sm md:text-lg text-stone-400 mb-8 leading-relaxed">Reserve sua mesa em poucos segundos e receba a confirmação direto no seu dispositivo.</p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 text-left">
                     <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 rounded-full border border-gold-accent flex items-center justify-center">
-                            <i class="fas fa-bolt gold-accent"></i>
+                        <div class="w-10 h-10 rounded-full border border-gold-accent flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-bolt gold-accent text-sm"></i>
                         </div>
                         <div>
-                            <h4 class="font-bold">Confirmação Ágil</h4>
-                            <p class="text-sm text-stone-500">Agendamento integrado ao nosso sistema.</p>
+                            <h4 class="font-bold text-xs md:text-sm">Confirmação Ágil</h4>
+                            <p class="text-[10px] md:text-xs text-stone-500">Integrado ao sistema.</p>
                         </div>
                     </div>
                     <div class="flex items-center gap-4">
-                        <div class="w-12 h-12 rounded-full border border-gold-accent flex items-center justify-center">
-                            <i class="fas fa-wine-glass-alt gold-accent"></i>
+                        <div class="w-10 h-10 rounded-full border border-gold-accent flex items-center justify-center flex-shrink-0">
+                            <i class="fas fa-wine-glass-alt gold-accent text-sm"></i>
                         </div>
                         <div>
-                            <h4 class="font-bold">Ambiente Climatizado</h4>
-                            <p class="text-sm text-stone-500">Conforto para você e seus convidados.</p>
+                            <h4 class="font-bold text-xs md:text-sm">Ambiente Climatizado</h4>
+                            <p class="text-[10px] md:text-xs text-stone-500">Conforto total.</p>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="bg-white p-10 rounded-[3rem] text-stone-800 shadow-2xl relative z-10">
-                <h3 class="text-2xl font-bold mb-8 text-center text-stone-900 uppercase tracking-widest">Reserva de Mesa</h3>
-                <form id="reservaForm" class="space-y-6" onsubmit="event.preventDefault(); showSuccess();">
-                    <div class="space-y-2">
-                        <label class="text-[10px] uppercase font-bold text-stone-400 ml-2">Nome Completo</label>
-                        <input type="text" required placeholder="Seu Nome" class="w-full p-4 bg-stone-100 rounded-2xl border-none outline-none focus:ring-2 focus:ring-gold-accent transition text-stone-800">
+            <div class="bg-white p-8 md:p-10 rounded-[2rem] md:rounded-[3rem] text-stone-800 shadow-2xl relative z-10">
+                <h3 class="text-xl md:text-2xl font-bold mb-6 md:mb-8 text-center text-stone-900 uppercase tracking-widest">Reserva de Mesa</h3>
+                <form id="reservaForm" class="space-y-4 md:space-y-6" onsubmit="event.preventDefault(); showSuccess();">
+                    <div class="space-y-1">
+                        <label class="text-[9px] md:text-[10px] uppercase font-bold text-stone-400 ml-2">Nome Completo</label>
+                        <input type="text" required placeholder="Seu Nome" class="w-full p-4 bg-stone-100 rounded-2xl border-none outline-none focus:ring-2 focus:ring-gold-accent transition text-sm">
                     </div>
 
-                    <!-- Campo de Contato com Validação Numérica -->
-                    <div class="space-y-2">
-                        <label class="text-[10px] uppercase font-bold text-stone-400 ml-2">WhatsApp / Contato</label>
-                        <input type="text"
-                               required
-                               placeholder="(54) 9 9999-9999"
-                               maxlength="11"
-                               oninput="this.value = this.value.replace(/[^0-9]/g, '');"
-                               class="w-full p-4 bg-stone-100 rounded-2xl border-none outline-none focus:ring-2 focus:ring-gold-accent transition text-stone-800">
+                    <div class="space-y-1">
+                        <label class="text-[9px] md:text-[10px] uppercase font-bold text-stone-400 ml-2">WhatsApp / Contato</label>
+                        <input type="text" required placeholder="(54) 9 9999-9999" maxlength="11" oninput="this.value = this.value.replace(/[^0-9]/g, '');" class="w-full p-4 bg-stone-100 rounded-2xl border-none outline-none focus:ring-2 focus:ring-gold-accent transition text-sm">
                     </div>
 
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="space-y-2">
-                            <label class="text-[10px] uppercase font-bold text-stone-400 ml-2">Data</label>
-                            <input type="date" required class="w-full p-4 bg-stone-100 rounded-2xl border-none outline-none focus:ring-2 focus:ring-gold-accent transition text-stone-800">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div class="space-y-1">
+                            <label class="text-[9px] md:text-[10px] uppercase font-bold text-stone-400 ml-2">Data</label>
+                            <input type="date" required class="w-full p-4 bg-stone-100 rounded-2xl border-none outline-none focus:ring-2 focus:ring-gold-accent transition text-sm">
                         </div>
-
-                        <!-- Campo de Pessoas Livre com Validação Numérica -->
-                        <div class="space-y-2">
-                            <label class="text-[10px] uppercase font-bold text-stone-400 ml-2">Nº de Pessoas</label>
-                            <input type="text"
-                                   required
-                                   placeholder="Ex: 4"
-                                   maxlength="3"
-                                   oninput="this.value = this.value.replace(/[^0-9]/g, '');"
-                                   class="w-full p-4 bg-stone-100 rounded-2xl border-none outline-none focus:ring-2 focus:ring-gold-accent transition text-stone-800">
+                        <div class="space-y-1">
+                            <label class="text-[9px] md:text-[10px] uppercase font-bold text-stone-400 ml-2">Nº de Pessoas</label>
+                            <input type="text" required placeholder="Ex: 4" maxlength="3" oninput="this.value = this.value.replace(/[^0-9]/g, '');" class="w-full p-4 bg-stone-100 rounded-2xl border-none outline-none focus:ring-2 focus:ring-gold-accent transition text-sm text-stone-800">
                         </div>
                     </div>
-                    <button type="submit" class="w-full bg-[#4a0404] text-white py-5 rounded-2xl font-bold shadow-lg hover:bg-black transition uppercase tracking-widest text-sm transform active:scale-95">
+                    <button type="submit" class="w-full bg-[#4a0404] text-white py-4 md:py-5 rounded-2xl font-bold shadow-lg hover:bg-black transition uppercase tracking-widest text-[11px] md:text-sm transform active:scale-95">
                         Solicitar Reserva
                     </button>
-                    <p class="text-[10px] text-center text-stone-400 uppercase font-bold tracking-tighter italic">Bella Veneto Galeteria Passo Fundo</p>
+                    <p class="text-[9px] text-center text-stone-400 uppercase font-bold tracking-tighter italic">Bella Veneto Galeteria Passo Fundo</p>
                 </form>
             </div>
         </div>
     </section>
 
     <!-- Localização -->
-    <section id="contato" class="py-24 bg-white">
+    <section id="contato" class="py-16 md:py-24 bg-white">
         <div class="max-w-7xl mx-auto px-6">
-            <div class="flex flex-col lg:flex-row gap-16 items-center">
-                <div class="lg:w-1/3 space-y-8">
-                    <h2 class="text-4xl text-stone-900 leading-tight">Visite a nossa Casa<br /><span class="gold-accent">em Passo Fundo</span></h2>
-                    <p class="text-stone-600 text-lg">Próximo à Gare, um espaço acolhedor esperando por você e sua família.</p>
-                    <div class="space-y-6">
+            <div class="flex flex-col lg:flex-row gap-12 md:gap-16 items-center">
+                <div class="lg:w-1/3 space-y-6 md:space-y-8 text-center lg:text-left">
+                    <h2 class="text-3xl md:text-4xl text-stone-900 leading-tight">Visite a nossa Casa<br /><span class="gold-accent">em Passo Fundo</span></h2>
+                    <p class="text-sm md:text-lg text-stone-600">Próximo à Gare, um espaço acolhedor esperando por você.</p>
+                    <div class="space-y-4 md:space-y-6 text-left max-w-sm mx-auto lg:mx-0">
                         <div class="flex items-center gap-4">
-                            <i class="fas fa-map-marker-alt text-2xl gold-accent"></i>
+                            <i class="fas fa-map-marker-alt text-xl md:text-2xl gold-accent"></i>
                             <div>
-                                <h4 class="font-bold text-stone-900">Endereço</h4>
-                                <p class="text-stone-500">Avenida Presidente Vargas, 33 - Centro</p>
-                                <p class="text-stone-400 text-xs">Passo Fundo - RS, 99070-000</p>
+                                <h4 class="font-bold text-stone-900 text-sm md:text-base">Endereço</h4>
+                                <p class="text-stone-500 text-xs md:text-sm">Avenida Presidente Vargas, 33 - Centro</p>
+                                <p class="text-stone-400 text-[10px] md:text-xs">Passo Fundo - RS, 99070-000</p>
                             </div>
                         </div>
                         <div class="flex items-center gap-4">
-                            <i class="fas fa-phone-alt text-2xl gold-accent"></i>
+                            <i class="fas fa-phone-alt text-xl md:text-2xl gold-accent"></i>
                             <div>
-                                <h4 class="font-bold text-stone-900">Telefone / Reservas</h4>
-                                <p class="text-stone-500">(54) 99920-5856</p>
+                                <h4 class="font-bold text-stone-900 text-sm md:text-base">Telefone / Reservas</h4>
+                                <p class="text-stone-500 text-xs md:text-sm">(54) 99920-5856</p>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="lg:w-2/3 w-full h-[500px] rounded-[3rem] overflow-hidden shadow-2xl border-8 border-stone-50">
+                <div class="lg:w-2/3 w-full h-[300px] md:h-[500px] rounded-[2rem] md:rounded-[3rem] overflow-hidden shadow-2xl border-4 md:border-8 border-stone-50">
                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3488.5807901064117!2d-52.4178556244567!3d-28.262529875874252!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94fd493a033f923b%3A0x7d6360c7f21626f!2sAv.%20Pres.%20Vargas%2C%2033%20-%20Vila%20Rodrigues%2C%20Passo%20Fundo%20-%20RS%2C%2099010-060!5e0!3m2!1spt-BR!2sbr!4v1716480000000!5m2!1spt-BR!2sbr"
                             width="100%"
                             height="100%"
@@ -377,15 +388,15 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-stone-50 py-16 border-t border-stone-200">
+    <footer class="bg-stone-50 py-12 md:py-16 border-t border-stone-200">
         <div class="max-w-7xl mx-auto px-6 text-center">
-            <img src="Images/Logo.png" alt="Logo" class="w-20 h-20 rounded-full logo-circle mx-auto mb-6 object-cover shadow-lg">
-            <div class="text-3xl font-bold text-stone-900 mb-6 tracking-tighter">BELLA <span class="gold-accent">VENETO</span></div>
-            <div class="flex justify-center space-x-6 mb-10">
-                <a href="https://www.instagram.com/bellaveneto/" target="_blank" class="text-stone-400 hover:text-gold-accent text-2xl transition"><i class="fab fa-instagram"></i></a>
-                <a href="https://wa.me/5554999205856" class="text-stone-400 hover:text-gold-accent text-2xl transition"><i class="fab fa-whatsapp"></i></a>
+            <img src="Images/Logo.png" alt="Logo" class="w-16 h-16 md:w-20 md:h-20 rounded-full logo-circle mx-auto mb-6 object-cover shadow-lg">
+            <div class="text-2xl md:text-3xl font-bold text-stone-900 mb-6 tracking-tighter">BELLA <span class="gold-accent">VENETO</span></div>
+            <div class="flex justify-center space-x-8 mb-10">
+                <a href="https://www.instagram.com/bellaveneto/" target="_blank" class="text-stone-400 hover:text-gold-accent text-3xl transition"><i class="fab fa-instagram"></i></a>
+                <a href="https://wa.me/5554999205856" class="text-stone-400 hover:text-gold-accent text-3xl transition"><i class="fab fa-whatsapp"></i></a>
             </div>
-            <p class="text-stone-400 text-xs uppercase tracking-widest">
+            <p class="text-stone-400 text-[10px] md:text-xs uppercase tracking-widest leading-loose">
                 &copy; 2026 Bella Veneto Galeteria.<br />
                 Desenvolvido por J. Caetano
             </p>
@@ -393,23 +404,36 @@
     </footer>
 
     <!-- WhatsApp Floating -->
-    <a href="https://wa.me/5554999205856" class="fixed bottom-8 right-8 bg-green-500 text-white w-16 h-16 rounded-full flex items-center justify-center text-3xl shadow-2xl z-50 transform hover:scale-110 transition active:scale-95 border-2 border-white">
+    <a href="https://wa.me/5554999205856" class="fixed bottom-6 right-6 md:bottom-8 md:right-8 bg-green-500 text-white w-14 h-14 md:w-16 md:h-16 rounded-full flex items-center justify-center text-2xl md:text-3xl shadow-2xl z-50 transform hover:scale-110 transition active:scale-95 border-2 border-white">
         <i class="fab fa-whatsapp"></i>
     </a>
 
     <!-- Modal de Sucesso -->
     <div id="modal-sucesso" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] flex items-center justify-center p-4">
-        <div class="bg-white p-12 rounded-[3rem] max-w-sm w-full text-center shadow-2xl">
-            <div class="w-24 h-24 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-8 text-4xl shadow-inner">
+        <div class="bg-white p-10 md:p-12 rounded-[2rem] md:rounded-[3rem] max-w-sm w-full text-center shadow-2xl">
+            <div class="w-20 h-20 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-6 text-4xl shadow-inner">
                 <i class="fas fa-check"></i>
             </div>
-            <h2 class="text-3xl font-bold mb-4 text-stone-900">Reserva Solicitada!</h2>
-            <p class="text-stone-500 mb-8 leading-relaxed">Nossa central recebeu sua solicitação. Entraremos em contato via WhatsApp para confirmar.</p>
-            <button onclick="hideSuccess()" class="w-full bg-[#4a0404] text-white py-5 rounded-2xl font-bold shadow-lg hover:bg-black transition uppercase tracking-widest text-xs">Entendido</button>
+            <h2 class="text-2xl md:text-3xl font-bold mb-4 text-stone-900">Reserva Solicitada!</h2>
+            <p class="text-xs md:text-sm text-stone-500 mb-8 leading-relaxed">Nossa central recebeu sua solicitação. Entraremos em contato via WhatsApp para confirmar.</p>
+            <button onclick="hideSuccess()" class="w-full bg-[#4a0404] text-white py-4 md:py-5 rounded-2xl font-bold shadow-lg hover:bg-black transition uppercase tracking-widest text-[11px] md:text-xs">Entendido</button>
         </div>
     </div>
 
     <script>
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const icon = document.getElementById('menu-icon');
+            menu.classList.toggle('menu-open');
+
+            // Trava o scroll do body quando o menu está aberto
+            if (menu.classList.contains('menu-open')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = 'auto';
+            }
+        }
+
         function showSuccess() {
             document.getElementById('modal-sucesso').classList.remove('hidden');
         }
