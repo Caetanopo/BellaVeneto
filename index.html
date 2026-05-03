@@ -1,0 +1,346 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bella Veneto | Galeteria e Tradição</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        .bg-veneto {
+            background-color: #4a0404;
+        }
+
+        .text-veneto {
+            color: #4a0404;
+        }
+
+        .gold-accent {
+            color: #d4af37;
+        }
+
+        .hero-overlay {
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.8));
+        }
+
+        .card-hover:hover {
+            transform: translateY(-10px);
+            transition: all 0.4s ease;
+        }
+
+        /* AI Pulse Animation */
+        .ai-pulse {
+            box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7);
+            animation: pulse-gold 2s infinite;
+        }
+
+        @keyframes pulse-gold {
+            0% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.7);
+            }
+
+            70% {
+                transform: scale(1);
+                box-shadow: 0 0 0 10px rgba(212, 175, 55, 0);
+            }
+
+            100% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(212, 175, 55, 0);
+            }
+        }
+    </style>
+</head>
+<body class="bg-stone-50 text-stone-800">
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 bg-white/95 backdrop-blur-md shadow-sm">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="text-2xl font-bold text-veneto tracking-tighter">BELLA <span class="gold-accent">VENETO</span></div>
+            </div>
+            <div class="hidden md:flex space-x-8 font-medium uppercase text-[10px] tracking-[0.2em]">
+                <a href="#inicio" class="hover:text-veneto transition">Início</a>
+                <a href="#cardapio" class="hover:text-veneto transition">Cardápio</a>
+                <a href="#ia-sugestoes" class="hover:text-gold-accent transition">Menu Inteligente ✨</a>
+                <a href="#reserva" class="hover:text-veneto transition">Reservas</a>
+            </div>
+            <button onclick="document.getElementById('reserva').scrollIntoView({behavior:'smooth'})" class="bg-veneto text-white px-6 py-2 rounded-full text-xs font-bold uppercase hover:bg-red-900 transition">
+                Reservar Mesa
+            </button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="relative h-screen flex items-center justify-center text-center text-white overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&q=80&w=1920" alt="Ambiente Bella Veneto" class="w-full h-full object-cover">
+            <div class="absolute inset-0 hero-overlay"></div>
+        </div>
+        <div class="relative z-10 px-4 max-w-4xl">
+            <span class="gold-accent uppercase tracking-[0.4em] text-xs mb-4 block font-bold">Passo Fundo • Rio Grande do Sul</span>
+            <h1 class="text-6xl md:text-8xl mb-6 leading-tight">Tradição italiana que une gerações.</h1>
+            <p class="text-lg md:text-2xl mb-10 font-light italic text-stone-200">O sabor autêntico do galeto ao primo canto, servido com a alma da colônia.</p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#ia-sugestoes" class="bg-gold-accent text-white px-10 py-4 rounded-full font-bold hover:bg-yellow-600 transition shadow-xl uppercase text-sm ai-pulse">O que comer hoje? ✨</a>
+                <a href="#reserva" class="bg-veneto text-white px-10 py-4 rounded-full font-bold hover:bg-red-900 transition shadow-xl uppercase text-sm">Reservar Agora</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Especial -->
+    <section id="cardapio" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-20">
+                <h2 class="text-4xl md:text-5xl text-veneto mb-4">Destaques do Cardápio</h2>
+                <p class="text-stone-400 uppercase tracking-widest text-xs font-bold">Feito com ingredientes locais e amor</p>
+                <div class="w-20 h-1 bg-gold-accent mx-auto mt-6"></div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-10">
+                <!-- Prato 1 -->
+                <div class="card-hover bg-stone-50 rounded-[2rem] overflow-hidden shadow-sm border border-stone-100 flex flex-col">
+                    <img src="https://images.unsplash.com/photo-1614332287897-cdc485fa562d?auto=format&fit=crop&q=80&w=600" class="w-full h-64 object-cover" alt="Galeto">
+                    <div class="p-8 flex-1">
+                        <h3 class="text-2xl font-bold mb-2">Galeto ao Primo Canto</h3>
+                        <p class="text-stone-500 text-sm mb-6">Nossa estrela. Galeto marinado em ervas finas e sálvia, assado lentamente na brasa.</p>
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-veneto font-bold text-xl">R$ 58,90</span>
+                        </div>
+                        <button onclick="askSommelier('Galeto ao Primo Canto')" class="w-full border border-gold-accent text-gold-accent py-2 rounded-xl text-xs font-bold hover:bg-gold-accent hover:text-white transition">
+                            Harmonização ✨
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Prato 2 -->
+                <div class="card-hover bg-stone-50 rounded-[2rem] overflow-hidden shadow-sm border border-stone-100 flex flex-col">
+                    <img src="https://images.unsplash.com/photo-1551183053-bf91a1d81141?auto=format&fit=crop&q=80&w=600" class="w-full h-64 object-cover" alt="Massas">
+                    <div class="p-8 flex-1">
+                        <h3 class="text-2xl font-bold mb-2">Tortéi de Moranga</h3>
+                        <p class="text-stone-500 text-sm mb-6">Massa artesanal recheada com abóbora kabotiá, servida com molho de manteiga e sálvia.</p>
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-veneto font-bold text-xl">R$ 45,00</span>
+                        </div>
+                        <button onclick="askSommelier('Tortéi de Moranga')" class="w-full border border-gold-accent text-gold-accent py-2 rounded-xl text-xs font-bold hover:bg-gold-accent hover:text-white transition">
+                            Harmonização ✨
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Prato 3 -->
+                <div class="card-hover bg-stone-50 rounded-[2rem] overflow-hidden shadow-sm border border-stone-100 flex flex-col">
+                    <img src="https://images.unsplash.com/photo-1619860860774-1e2e17343432?auto=format&fit=crop&q=80&w=600" class="w-full h-64 object-cover" alt="Acompanhamentos">
+                    <div class="p-8 flex-1">
+                        <h3 class="text-2xl font-bold mb-2">Polenta Brustolada</h3>
+                        <p class="text-stone-500 text-sm mb-6">A clássica polenta frita, crocante por fora e cremosa por dentro, com queijo parmesão.</p>
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-veneto font-bold text-xl">R$ 22,00</span>
+                        </div>
+                        <button onclick="askSommelier('Polenta Brustolada')" class="w-full border border-gold-accent text-gold-accent py-2 rounded-xl text-xs font-bold hover:bg-gold-accent hover:text-white transition">
+                            Harmonização ✨
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Suggestion Section -->
+    <section id="ia-sugestoes" class="py-24 bg-stone-100">
+        <div class="max-w-4xl mx-auto px-6 text-center">
+            <div class="inline-block bg-gold-accent text-white px-4 py-1 rounded-full text-[10px] font-bold uppercase mb-4">Tecnologia Gemini AI</div>
+            <h2 class="text-4xl text-veneto mb-6">Dúvida no pedido? Peça ajuda à IA ✨</h2>
+            <p class="text-stone-600 mb-10 leading-relaxed">Diga-nos do que você gosta ou qual a ocasião, e nosso assistente gastronômico sugerirá a combinação perfeita para a sua mesa.</p>
+
+            <div class="bg-white p-8 rounded-[2.5rem] shadow-xl border border-stone-200">
+                <textarea id="ai-query" rows="3" placeholder="Ex: Estou com muita fome e gosto de massas doces..." class="w-full p-6 bg-stone-50 rounded-2xl border-none outline-none focus:ring-2 focus:ring-gold-accent transition resize-none text-stone-700"></textarea>
+                <button id="btn-suggest" onclick="getPersonalizedMenu()" class="mt-6 bg-veneto text-white px-10 py-4 rounded-full font-bold hover:bg-red-950 transition-all flex items-center justify-center gap-3 mx-auto uppercase tracking-widest text-xs">
+                    Gerar Minha Sugestão ✨
+                </button>
+
+                <!-- AI Result Area -->
+                <div id="ai-response-container" class="hidden mt-10 p-8 bg-stone-50 rounded-3xl text-left border border-gold-accent/20">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-8 h-8 bg-gold-accent rounded-full flex items-center justify-center text-white">
+                            <i class="fas fa-sparkles text-sm"></i>
+                        </div>
+                        <span class="font-bold text-veneto text-sm uppercase">Nossa Sugestão Especial</span>
+                    </div>
+                    <div id="ai-response-text" class="text-stone-700 leading-relaxed italic"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Event Planner Section -->
+    <section class="py-24 bg-white border-y border-stone-200">
+        <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center gap-16">
+            <div class="md:w-1/2">
+                <h2 class="text-4xl text-veneto mb-6">Planejador de Eventos IA ✨</h2>
+                <p class="text-stone-600 mb-8 leading-relaxed">Vai reunir a família ou a empresa? Use nossa IA para calcular o cardápio ideal, quantidade de galetos e as melhores opções de bebidas para o seu grupo.</p>
+                <button onclick="openEventPlanner()" class="border-2 border-veneto text-veneto px-8 py-3 rounded-full font-bold hover:bg-veneto hover:text-white transition uppercase text-xs tracking-widest">
+                    Iniciar Planejador ✨
+                </button>
+            </div>
+            <div class="md:w-1/2">
+                <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&q=80&w=800" class="rounded-[3rem] shadow-2xl" alt="Eventos">
+            </div>
+        </div>
+    </section>
+
+    <!-- Reservas -->
+    <section id="reserva" class="py-24 bg-stone-900 text-white relative overflow-hidden">
+        <div class="absolute top-0 right-0 opacity-5 pointer-events-none">
+            <i class="fas fa-utensils text-[40rem]"></i>
+        </div>
+        <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-20 items-center">
+            <div class="relative z-10">
+                <h2 class="text-5xl font-bold mb-8 leading-tight">Experiência Digital, <br><span class="gold-accent">Sabor Real.</span></h2>
+                <p class="text-stone-400 text-lg mb-8 leading-relaxed">Desenvolvemos um sistema exclusivo para que você garanta sua mesa em poucos segundos, sem filas e com confirmação imediata.</p>
+            </div>
+
+            <div class="bg-white p-10 rounded-[3rem] text-stone-800 shadow-2xl relative z-10">
+                <h3 class="text-2xl font-bold mb-8 text-center text-veneto uppercase tracking-widest">Reserva de Mesa</h3>
+                <form id="reservaForm" class="space-y-6" onsubmit="event.preventDefault(); showSuccess();">
+                    <div class="space-y-2">
+                        <label class="text-[10px] uppercase font-bold text-stone-400 ml-2">Nome Completo</label>
+                        <input type="text" required placeholder="Ex: Gabriel Rocha" class="w-full p-4 bg-stone-100 rounded-2xl border-none outline-none focus:ring-2 focus:ring-veneto transition">
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="space-y-2">
+                            <label class="text-[10px] uppercase font-bold text-stone-400 ml-2">Data</label>
+                            <input type="date" required class="w-full p-4 bg-stone-100 rounded-2xl border-none outline-none focus:ring-2 focus:ring-veneto transition">
+                        </div>
+                        <div class="space-y-2">
+                            <label class="text-[10px] uppercase font-bold text-stone-400 ml-2">Pessoas</label>
+                            <select class="w-full p-4 bg-stone-100 rounded-2xl border-none outline-none focus:ring-2 focus:ring-veneto transition">
+                                <option>2 Pessoas</option>
+                                <option>4 Pessoas</option>
+                                <option>6 Pessoas</option>
+                                <option>8+ Pessoas</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" class="w-full bg-veneto text-white py-5 rounded-2xl font-bold shadow-lg hover:bg-red-950 transition uppercase tracking-widest text-sm transform active:scale-95">
+                        Solicitar Reserva
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contato" class="bg-stone-50 py-16 border-t border-stone-200">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <div class="text-3xl font-bold text-veneto mb-6">BELLA <span class="gold-accent">VENETO</span></div>
+            <div class="flex justify-center space-x-6 mb-10">
+                <a href="https://www.instagram.com/bellaveneto/" target="_blank" class="text-stone-400 hover:text-veneto text-2xl transition"><i class="fab fa-instagram"></i></a>
+            </div>
+            <p class="text-stone-400 text-xs uppercase tracking-widest">&copy; 2024 Bella Veneto Galeteria. Tecnologia Gemini AI integrada.</p>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <div id="modal-sucesso" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-[100] flex items-center justify-center p-4">
+        <div class="bg-white p-12 rounded-[3rem] max-w-sm w-full text-center shadow-2xl">
+            <div class="w-24 h-24 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-8 text-4xl">
+                <i class="fas fa-check"></i>
+            </div>
+            <h2 class="text-3xl font-bold mb-4">Pedido Enviado!</h2>
+            <button onclick="hideSuccess()" class="w-full bg-veneto text-white py-4 rounded-2xl font-bold shadow-lg hover:bg-red-900 transition uppercase tracking-widest text-xs">Entendido</button>
+        </div>
+    </div>
+
+    <!-- AI Interaction Script -->
+    <script>
+        const apiKey = ""; // Chave injetada em runtime
+
+        async function callGemini(prompt, systemPrompt) {
+            const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`;
+
+            const payload = {
+                contents: [{ parts: [{ text: prompt }] }],
+                systemInstruction: { parts: [{ text: systemPrompt }] }
+            };
+
+            for (let i = 0; i < 5; i++) {
+                try {
+                    const response = await fetch(endpoint, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload)
+                    });
+                    const data = await response.json();
+                    return data.candidates?.[0]?.content?.parts?.[0]?.text;
+                } catch (e) {
+                    await new Promise(r => setTimeout(r, Math.pow(2, i) * 1000));
+                }
+            }
+            return "Desculpe, nosso assistente está descansando no momento. Tente novamente em instantes.";
+        }
+
+        async function getPersonalizedMenu() {
+            const query = document.getElementById('ai-query').value;
+            if (!query) return alert("Conte-nos um pouco sobre seu gosto!");
+
+            const btn = document.getElementById('btn-suggest');
+            const container = document.getElementById('ai-response-container');
+            const textEl = document.getElementById('ai-response-text');
+
+            btn.disabled = true;
+            btn.innerText = "Consultando Chef... ✨";
+
+            const systemPrompt = `Você é o sommelier e assistente gastronômico da Bella Veneto, uma galeteria tradicional de Passo Fundo. Seu tom é amigável, apaixonado pela culinária italiana e refinado.
+            O cardápio fixo inclui: Galeto ao Primo Canto (marinado com vinho branco e sálvia), Tortéi de Moranga (doce com sálvia e nozes), Polenta Brustolada, Radicci com Bacon, e Sagu com Creme.
+            Sugira combinações específicas baseadas na entrada do usuário. Mantenha a resposta curta e apetitosa.`;
+
+            const response = await callGemini(query, systemPrompt);
+
+            textEl.innerText = response;
+            container.classList.remove('hidden');
+            btn.disabled = false;
+            btn.innerText = "Gerar Minha Sugestão ✨";
+            container.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        async function askSommelier(dish) {
+            const systemPrompt = "Você é um sommelier experiente da Bella Veneto. Sugira UM vinho (tipo ou marca clássica) para harmonizar com o prato citado. Explique o motivo em uma única frase poética.";
+            const response = await callGemini(`Qual o melhor acompanhamento líquido para: ${dish}?`, systemPrompt);
+
+            // Reutiliza o modal de sucesso para mostrar a dica da IA
+            const modal = document.getElementById('modal-sucesso');
+            modal.querySelector('h2').innerText = "Dica do Sommelier ✨";
+            modal.querySelector('p').innerText = response;
+            modal.classList.remove('hidden');
+        }
+
+        async function openEventPlanner() {
+            const pessoas = prompt("Para quantas pessoas será o seu evento?");
+            if (!pessoas) return;
+
+            const systemPrompt = "Você é um organizador de eventos da galeteria Bella Veneto. Com base no número de pessoas, sugira a quantidade de galetos, tipos de massa e uma dica de ouro para o evento ser um sucesso. Seja breve e cordial.";
+            const response = await callGemini(`Estou organizando um jantar para ${pessoas} pessoas. Como planejar o cardápio?`, systemPrompt);
+
+            const modal = document.getElementById('modal-sucesso');
+            modal.querySelector('h2').innerText = "Plano do Evento ✨";
+            modal.querySelector('p').innerText = response;
+            modal.classList.remove('hidden');
+        }
+
+        function showSuccess() { document.getElementById('modal-sucesso').classList.remove('hidden'); }
+        function hideSuccess() { document.getElementById('modal-sucesso').classList.add('hidden'); }
+    </script>
+</body>
+</html>
